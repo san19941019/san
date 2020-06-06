@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+<meta charset="utf-8"></meta>
+<title>缺陷管理系统</title>
+<link rel="stylesheet" type="text/css"
+	href="jquery-easyui-1.7.0/themes/default/easyui.css" />
+<link rel="stylesheet" type="text/css"
+	href="jquery-easyui-1.7.0/themes/icon.css" />
+<script type="text/javascript" src="jquery-easyui-1.7.0/jquery.min.js"></script>
+<script type="text/javascript"
+	src="jquery-easyui-1.7.0/jquery.easyui.min.js"></script>
+<!--中文化-->
+<script type="text/javascript"
+	src="jquery-easyui-1.7.0/locale/easyui-lang-zh_CN.js"></script>
+<script type="text/javascript">
+	function openTab(text, url, iconCls) {
+        if($("#tabs").tabs("exists",text)){
+            $("#tabs").tabs("select",text);
+        }else{
+			//如果不存在则新增加一个
+			var content = "<iframe frameborder=0 scrolling='auto' style='width:100%;height:100%' src='"
+					+ url + "'></iframe>";
+			$("#tabs").tabs("add", {
+				title : text, //标题
+				iconCls : iconCls, //图标
+				closable : true, //可以关闭
+				content : content
+			//内容，内嵌一个 iframe！
+			});
+        }
+		
+	}
+</script>
+</head>
+
+<body class="easyui-layout">
+	<div region="center">
+		<div class="easyui-tabs" fit="true" border="false" id="tabs">
+			<div title="首页" data-options="iconCls:'icon-help'">
+				<div align="center" style="padding-top: 100px">
+					<font color="green" size="10">欢迎使用</font>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div region="west" style="width: 200px;" title="广沣共享典当管理平台" split="true">
+		<div style="padding-top: 10px; padding-left: 10px;">
+			<ul id="tt" class="easyui-tree" >
+				<li><span>门店配置</span>
+					<ul >
+						<li><span >门店资料</span></li>
+					</ul></li>
+				<li><span>仓库配置</span>
+					<ul >
+						<li><span >仓库资料</span></li>
+					</ul></li>
+			    <li><span>商品配置</span>
+					<ul >
+						<li><span >商品大类</span></li>
+						<li ><span >商品小类</span></li>
+						<li><span >品牌管理</span></li>
+						<li><span >商品属性</span></li>
+					</ul></li>
+			  <li><span>评估鉴定</span>
+					<ul >
+						<li><span >商品列表</span></li>
+					</ul></li>
+			</ul>
+		</div>
+	</div>
+
+
+</body>
+<script type="text/javascript">
+$(function () {
+	$('#tt').tree({
+		 state:"closed",
+	　　　　onSelect: function (node) {
+	　　　　　　if (node.state == "closed"){
+	　　　　　　　　$(this).tree('expand', node.target);
+	　　　　　　}
+	　　　　　　else{
+	　　　　　　　　$(this).tree('collapse', node.target);
+	　　　　　　}
+	　　　　}
+	　　});
+	// 找到 #tt 树形 id， 再移除图标
+    $('#tt').find("span.tree-icon").removeClass('tree-icon tree-folder  tree-file tree-folder-open');
+    $('#tt').find("span.tree-hit").removeClass('tree-expanded');
+    // console.log(icons3);
+});
+$('#tt').tree({	onClick: function(node){	
+	console.log(node.text);
+	if(node.text=="缺陷列表"){openTab("缺陷列表", "http://localhost:8080/SSM01/defectlist.html", null)}
+	else if
+	(node.text=="缺陷分配"){openTab("缺陷分配", "http://localhost:8080/SSM01/defectdis.html", null)}
+	else if
+	(node.text=="缺陷处理"){openTab("缺陷处理", "http://localhost:8080/SSM01/defecthandle.html", null)}
+	else if
+	(node.text=="缺陷反馈"){openTab("缺陷反馈", "http://localhost:8080/SSM01/defectfeedback.html", null)}
+	else if
+	(node.text=="项目管理"){openTab("项目管理", "http://localhost:8080/SSM01/projectManagement.html", null)}
+	else if
+	(node.text=="成员管理"){openTab("成员管理", "http://localhost:8080/SSM01/memberManagement.html", null)}
+	else if
+	(node.text=="优先级"){openTab("优先级", "http://localhost:8080/SSM01/priority.html", null)}
+	else if
+	(node.text=="严重程度"){openTab("严重程度", "http://localhost:8080/SSM01/severeState.html", null)}
+	else if
+	(node.text=="缺陷分类"){openTab("缺陷分类", "http://localhost:8080/SSM01/defectClass.html", null)}
+	else if
+	(node.text=="任务状态"){openTab("任务状态", "http://localhost:8080/SSM01/taskState.html", null)}
+	else if
+	(node.text=="缺陷分类占比"){openTab("缺陷分类占比", "http://localhost:8080/SSM01/classRatio.html", null)}
+	else if
+	(node.text=="缺陷状态分布"){openTab("缺陷状态分布", "http://localhost:8080/SSM01/classState.html", null)}
+	else if
+	(node.text=="缺陷严重程度"){openTab("缺陷严重程度", "http://localhost:8080/SSM01/classSeverity.html", null)}
+	else if
+	(node.text=="工时统计日报"){openTab("工时统计日报", "http://localhost:8080/SSM01/classDay.html", null)}
+	else if
+	(node.text=="工时统计月报"){openTab("工时统计月报", "http://localhost:8080/SSM01/classMonth.html", null)}
+	
+		}});
+</script>
+</html>
